@@ -12,10 +12,10 @@ db = client["lecridusoir"]
 def home():
     return {"status": "Le Cri du Soir API running"}
 
-@app.get("/prayers")
-def get_prayers():
-    prayers = list(db.prayers.find({}, {"_id": 0}))
-    return prayers
+@app.post("/prayers")
+def create_prayer(prayer: dict):
+    db.prayers.insert_one(prayer)
+    return {"message": "Prayer added"}
 
 
 
